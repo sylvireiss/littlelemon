@@ -6,15 +6,32 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct Home: View {
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    let persistenceController = PersistenceController.shared
+    
     var body: some View {
-        TabView{
-            Menu().tabItem {Label("Menu", systemImage:"list.dash")}
-            UserProfile().tabItem {
-                Label("Profile", systemImage: "square.and.pencil")
-            }
-        }.navigationBarBackButtonHidden(true)
+        
+        TabView {
+            
+            Menu()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .tabItem {
+                    Text("Menu")
+                    Image(systemName: "list.dash")
+                }
+    
+            UserProfile()
+                .tabItem {
+                    Text("Profile")
+                    Image(systemName: "square.and.pencil")
+                }
+                
+            
+        }
+        .navigationBarBackButtonHidden(true)
         
     }
 }
