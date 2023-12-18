@@ -16,15 +16,19 @@ struct UserProfile: View {
     
     var body: some View {
         VStack{
-            Text("Personal Information")
-            Image("user").resizable()
-                .frame(width: 100, height: 100)
-            Text(firstname ?? "")
-            Text(lastname ?? "")
-            Text(email ?? "")
-            Button("Logout", action: logout)
+            Text("Personal Information").font(.title)
+            Image("Profile").resizable()
+                .frame(width: 200, height: 200)
+            Text(firstname ?? "First Name").foregroundColor(.gray).padding(5).font(.title2)
+            Text(lastname ?? "Last Name").foregroundColor(.gray).padding(5).font(.title2)
+            Text(email ?? "E-Mail").foregroundColor(.gray).padding(5).font(.title2)
             Spacer()
-        }
+            Button("Logout", action: logout).padding()
+                .frame(maxWidth: .infinity)
+                .background(Color("PrimaryGreen"))
+                .cornerRadius(10)
+                .foregroundColor(Color("HighlightGray"))
+        }.padding()
     }
     
     func logout(){

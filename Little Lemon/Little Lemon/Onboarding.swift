@@ -20,28 +20,37 @@ struct Onboarding: View {
     
     var body: some View {
         NavigationView{
-            
+            VStack {
+                
+                HeaderHeroView()
+                
                 VStack(
                     alignment: .center,
                     spacing: 10
                 ){
-                    NavigationLink("", destination: Home(), isActive: $isLoggedIn).padding()
+                    NavigationLink("", destination: Home(), isActive: $isLoggedIn)
                     TextField("First Name", text: $firstname).padding().border(.secondary)
                     TextField("Last Name", text: $lastname).padding().border(.secondary)
                     TextField("E-Mail", text: $email).padding().border(.secondary)
+                    Spacer()
                     Button(action: signIn) {
                         Text("Register")
                     }.padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("PrimaryGreen"))
+                        .cornerRadius(10)
+                        .foregroundColor(Color("HighlightGray"))
                     
                 }.padding(40)
-                .onAppear(
-                    perform: {if UserDefaults.standard.bool(forKey: kIsLoggedIn){
-                        isLoggedIn = true
-                    }}
+                    .onAppear(
+                        perform: {if UserDefaults.standard.bool(forKey: kIsLoggedIn){
+                            isLoggedIn = true
+                        }}
                         
-                    
-                )
+                        
+                    )
             }
+        }
         
     }
     
